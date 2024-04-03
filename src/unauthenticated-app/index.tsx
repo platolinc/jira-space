@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { RegisterScreen } from "unauthenticated-app/register";
 import { LoginScreen } from "unauthenticated-app/login";
+import { Card } from "antd";
 // import { Button, Card, Divider } from "antd";
 // import styled from "@emotion/styled";
 // import logo from "assets/logo.svg";
@@ -16,15 +17,17 @@ export default function UnauthenticatedApp() {
   // useDocumentTitle("请登录注册以继续");
 
   return (
-    <div>
-      {isRegister ? (
-        <RegisterScreen />
-      ) : (
-        <LoginScreen />
-      )}
-      <button onClick={() => setIsRegister(!isRegister)}>
-        {isRegister ? "已经有账号了？直接登录" : "没有账号？注册新账号"}
-      </button>
+    <div style={{display: "flex", justifyContent: "center"}}>
+      <Card>
+        {isRegister ? (
+          <RegisterScreen />
+        ) : (
+          <LoginScreen />
+        )}
+        <button onClick={() => setIsRegister(!isRegister)}>
+          {isRegister ? "已经有账号了？直接登录" : "没有账号？注册新账号"}
+        </button>
+      </Card>
     </div>
   );
 }
