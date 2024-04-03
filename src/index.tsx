@@ -4,12 +4,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { loadServer, DevTools } from "jira-dev-tool";
+import { AppProviders } from 'context';
 
 loadServer(() =>
   ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <React.StrictMode>
-      <DevTools />
-      <App />
+      <AppProviders>
+        <DevTools />
+        <App />
+      </AppProviders>
     </React.StrictMode>,
   ),
 );
