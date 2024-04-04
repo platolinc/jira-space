@@ -5,7 +5,7 @@ export const isFalsy = (value: unknown) => value === 0 ? false : !value
 export const isVoid = (value: unknown) => value === undefined || value === null || value === ''
 
 //在一个函数里,改变传入的对象本身是不好的
-export const clean0bject = (object: { [key:string]: unknown }) => {
+export const cleanObject = (object: { [key:string]: unknown }) => {
   const result = { ...object }
   
   Object.keys(result).forEach(key => {
