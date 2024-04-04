@@ -52,6 +52,7 @@ export const List = ({users, list}: ListProps) => {
         }
       ]}
       dataSource={list}
+      rowKey='id'
     />
   )
 }

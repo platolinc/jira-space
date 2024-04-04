@@ -2,15 +2,15 @@ import { useEffect, useState } from "react"
 
 export const isFalsy = (value: unknown) => value === 0 ? false : !value  
 
+export const isVoid = (value: unknown) => value === undefined || value === null || value === ''
+
 //在一个函数里,改变传入的对象本身是不好的
-export const clean0bject = (object: object) => {
+export const clean0bject = (object: { [key:string]: unknown }) => {
   const result = { ...object }
   
   Object.keys(result).forEach(key => {
-    // @ts-ignore：之后会解决这里的ts错误
     const value = result[key]
-    if (isFalsy(value)) { 
-      // @ts-ignore：之后会解决这里的ts错误
+    if (isVoid(value)) { 
       delete result[key] 
     }
   })
@@ -20,6 +20,7 @@ export const clean0bject = (object: object) => {
 export const useMount = (callback: () => void) => {
   useEffect(() => {
     callback()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 }
 
