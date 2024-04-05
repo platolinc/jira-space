@@ -1,4 +1,4 @@
-import { useMount, useDebounce } from "utils"
+import { useMount, useDebounce, useDocumentTitle } from "utils"
 import { List } from "./list"
 import { SearchPanel } from "./search-panel"
 import { useEffect, useState } from "react"
@@ -18,6 +18,8 @@ export const ProjectListScreen = () => {
   const debouncedParam = useDebounce(param, 300)
   const {isLoading, error, data: list} = useProjects(debouncedParam)
   const {data: users} = useUsers()
+
+  useDocumentTitle("项目列表");
 
   return <Container>
     <h1>项目列表</h1>
