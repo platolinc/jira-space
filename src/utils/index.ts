@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 export const isFalsy = (value: unknown) => value === 0 ? false : !value  
 
@@ -54,7 +54,7 @@ export const useDebounce = <V>(value: V, delay?: number) => {
 };
 
 export const useDocumentTitle = (title: string, keepOnUnmount = true) => {
-  const oldTitle = document.title;
+  const oldTitle = useRef(document.title).current;
 
   useEffect(() => {
     document.title = title;
@@ -63,11 +63,10 @@ export const useDocumentTitle = (title: string, keepOnUnmount = true) => {
   // 退出页面时是否恢复默认
   useEffect(() => {
     return () => {
-      if (keepOnUnmount) {
+      if (!keepOnUnmount) {
         document.title = oldTitle;
       }
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [keepOnUnmount, oldTitle]);
 };
   
