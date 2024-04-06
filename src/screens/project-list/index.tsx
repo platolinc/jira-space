@@ -9,15 +9,16 @@ import { useProjects } from "utils/project";
 import { Typography } from "antd";
 import { useUsers } from "utils/user";
 import { useUrlQueryParam } from "utils/url";
+import { useProjectsSearchParams } from "./util";
 
 export const ProjectListScreen = () => {
+  useDocumentTitle("项目列表", false);
 
-  const [param, setParam] = useUrlQueryParam(['name', 'personId'])
-  const debouncedParam = useDebounce(param, 300)
-  const {isLoading, error, data: list} = useProjects(debouncedParam)
+  const [param, setParam] = useProjectsSearchParams()
+  const {isLoading, error, data: list} = useProjects(useDebounce(param, 300))
   const {data: users} = useUsers()
 
-  useDocumentTitle("项目列表", false);
+
 
   return <Container>
     <h1>项目列表</h1>
