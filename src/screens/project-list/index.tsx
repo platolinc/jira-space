@@ -6,7 +6,7 @@ import { useHttp } from "utils/http";
 import styled from "@emotion/styled";
 import { useAsync } from "utils/use-async";
 import { useProjects } from "utils/project";
-import { Typography } from "antd";
+import { Button, Typography } from "antd";
 import { useUsers } from "utils/user";
 import { useUrlQueryParam } from "utils/url";
 import { useProjectsSearchParams } from "./util";
@@ -15,10 +15,8 @@ export const ProjectListScreen = () => {
   useDocumentTitle("项目列表", false);
 
   const [param, setParam] = useProjectsSearchParams()
-  const {isLoading, error, data: list} = useProjects(useDebounce(param, 300))
+  const {isLoading, error, data: list, retry} = useProjects(useDebounce(param, 300))
   const {data: users} = useUsers()
-
-
 
   return <Container>
     <h1>项目列表</h1>
@@ -28,7 +26,7 @@ export const ProjectListScreen = () => {
         <Typography.Text type={"danger"}>{error.message}</Typography.Text>
       ) : null}
       
-    <List loading={isLoading} users={users || []} dataSource={list || []} rowKey='id'></List>
+    <List refresh={retry} loading={isLoading} users={users || []} dataSource={list || []} rowKey='id'></List>
   </Container>
 }
 
