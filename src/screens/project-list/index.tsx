@@ -10,8 +10,9 @@ import { Button, Typography } from "antd";
 import { useUsers } from "utils/user";
 import { useUrlQueryParam } from "utils/url";
 import { useProjectsSearchParams } from "./util";
+import { Row } from "components/lib";
 
-export const ProjectListScreen = () => {
+export const ProjectListScreen = (props: {setProjectModalOpen: (isOpen: boolean) => void}) => {
   useDocumentTitle("项目列表", false);
 
   const [param, setParam] = useProjectsSearchParams()
@@ -19,14 +20,24 @@ export const ProjectListScreen = () => {
   const {data: users} = useUsers()
 
   return <Container>
-    <h1>项目列表</h1>
+    <Row between={true}>
+      <h1>项目列表</h1>
+      <Button onClick={() => props.setProjectModalOpen(true)}>创建项目</Button>
+    </Row>
     <SearchPanel users={users || []} param={param} setParam={setParam}></SearchPanel>
     
     {error ? (
         <Typography.Text type={"danger"}>{error.message}</Typography.Text>
       ) : null}
       
-    <List refresh={retry} loading={isLoading} users={users || []} dataSource={list || []} rowKey='id'></List>
+    <List 
+      setProjectModalOpen={props.setProjectModalOpen}
+      refresh={retry} 
+      loading={isLoading} 
+      users={users || []} 
+      dataSource={list || []} 
+      rowKey='id'
+    />
   </Container>
 }
 
