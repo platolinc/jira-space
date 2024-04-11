@@ -3,20 +3,19 @@ import React from "react";
 import { Kanban } from "types/kanban";
 import { useTasks } from "utils/task";
 import { useTasksSearchParams } from "screens/kanban/util";
-// import { useTaskTypes } from "utils/task-type";
-// import taskIcon from "assets/task.svg";
-// import bugIcon from "assets/bug.svg";
+import { useTaskTypes } from "utils/task-type";
+import taskIcon from "assets/task.svg";
+import bugIcon from "assets/bug.svg";
 import styled from "@emotion/styled";
-// import { Card } from "antd";
 
-// const TaskTypeIcon = ({ id }: { id: number }) => {
-//   const { data: taskTypes } = useTaskTypes();
-//   const name = taskTypes?.find((taskType) => taskType.id === id)?.name;
-//   if (!name) {
-//     return null;
-//   }
-//   return <img src={name === "task" ? taskIcon : bugIcon} />;
-// };
+const TaskTypeIcon = ({ id }: { id: number }) => {
+  const { data: taskTypes } = useTaskTypes();
+  const name = taskTypes?.find((taskType) => taskType.id === id)?.name;
+  if (!name) {
+    return null;
+  }
+  return <img src={name === "task" ? taskIcon : bugIcon} alt="type"/>;
+};
 
 export const KanbanColumn = ({ kanban }: { kanban: Kanban }) => {
   const { data: allTasks } = useTasks(useTasksSearchParams());
@@ -28,7 +27,7 @@ export const KanbanColumn = ({ kanban }: { kanban: Kanban }) => {
         {tasks?.map((task) => (
           <Card style={{ marginBottom: "0.5rem" }} key={task.id}>
             <div>{task.name}</div>
-            {/*<TaskTypeIcon id={task.typeId} />*/}
+            <TaskTypeIcon id={task.typeId} />
           </Card>
         ))}
       </TasksContainer>
