@@ -108,4 +108,7 @@ const HeaderLeft = styled(Row)``;
 
 const HeaderRight = styled.header``;
 
-const Main = styled.main``;
+const Main = styled.main`
+  display: flex;
+  overflow: hidden;
+`;
