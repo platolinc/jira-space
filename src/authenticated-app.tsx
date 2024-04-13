@@ -1,5 +1,4 @@
 import { useAuth } from "context/auth-context";
-import React, { useState } from "react";
 import { ProjectListScreen } from "screens/project-list";
 // import { useAuth } from "context/auth-context";
 import { ReactComponent as SoftwareLogo } from "assets/software-logo.svg";
@@ -13,6 +12,7 @@ import { ProjectScreen } from "screens/project";
 import { resetRoute } from "utils";
 import { ProjectModal } from "screens/project-list/project-modal";
 import { ProjectPopover } from "components/project-popover";
+import { UserPopover } from "components/user-popover";
 // import { resetRoute } from "utils";
 // import { ProjectModal } from "screens/project-list/project-modal";
 // import { ProjectPopover } from "components/project-popover";
@@ -65,7 +65,7 @@ const PageHeader = () => {
           <SoftwareLogo width={"18rem"} color={"rgb(38, 132, 255)"} />
         </ButtonNoPadding>
         <ProjectPopover />
-        <span>用户</span>
+        <UserPopover />
       </HeaderLeft>
       <HeaderRight>
         <User />
