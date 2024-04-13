@@ -5,20 +5,16 @@ import {
   useAddConfig,
   useDeleteConfig,
   useEditConfig,
-  useReorderConfig,
-  // useReorderTaskConfig,
+  useReorderTaskConfig,
 } from "utils/use-optimistic-options";
 import { Project } from "types/project";
-// import { SortProps } from "utils/kanban";
-import { useDebounce } from "utils/index";
-import { SortProps } from "./kanban";
+import { SortProps } from "utils/kanban";
 
 export const useTasks = (param?: Partial<Task>) => {
   const client = useHttp();
-  const debouncedParam = { ...param, name: useDebounce(param?.name, 200) };
 
-  return useQuery<Task[]>(["tasks", debouncedParam], () =>
-    client("tasks", { data: debouncedParam })
+  return useQuery<Task[]>(["tasks", param], () =>
+    client("tasks", { data: param })
   );
 };
 
@@ -73,5 +69,5 @@ export const useReorderTask = (queryKey: QueryKey) => {
       data: params,
       method: "POST",
     });
-  }, useReorderConfig(queryKey));
+  }, useReorderTaskConfig(queryKey));
 };
